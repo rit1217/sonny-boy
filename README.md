@@ -36,7 +36,7 @@ In Claude Code:
 
 ```
 /plugin marketplace add https://github.com/juliusbrussee/caveman.git
-/plugin marketplace add https://github.com/rit1217/ashura-skills.git
+/plugin marketplace add https://github.com/rit1217/sonny-boy.git
 /plugin install caveman@caveman
 /plugin install mattpocock-skills@claude-plugins-official
 /plugin install sonny-boy@sonny-boy-skills
