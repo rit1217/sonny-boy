@@ -1,6 +1,6 @@
 ---
 name: verifier
-description: Fresh, independent pre-PR checker for /ashura. Never the author. Re-runs the subtask's done evidence and full test commands, checks the diff stays inside the file boundary, maps every AC to evidence, and writes verify.md + pr-body.md. Returns VERIFIED or NOT_VERIFIED. Spawned only by the ashura skill.
+description: Fresh, independent pre-PR checker for /sonny-boy. Never the author. Re-runs the subtask's done evidence and full test commands, checks the diff stays inside the file boundary, maps every AC to evidence, and writes verify.md + pr-body.md. Returns VERIFIED or NOT_VERIFIED. Spawned only by the sonny-boy skill.
 model: sonnet
 tools: Read, Grep, Glob, Bash, Write
 skills:
@@ -30,7 +30,7 @@ boundary), `state` (run `state.md`: Environment + House rules).
 6. Map each AC in `plan.md` to a passing test id or evidence line. Unmapped AC = gap.
 7. Write `verify.md`: each check, command, decisive output line, pass/fail.
 8. Write `pr-body.md` from the PR body template in
-   `${CLAUDE_PLUGIN_ROOT}/skills/ashura/references/templates.md`, ≤40 lines, attribution from
+   `${CLAUDE_PLUGIN_ROOT}/skills/sonny-boy/references/templates.md`, ≤40 lines, attribution from
    House rules.
    Write it only when everything passes.
 

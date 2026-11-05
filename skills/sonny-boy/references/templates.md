@@ -1,8 +1,8 @@
-# Ashura templates
+# Sonny Boy templates
 
 ## state.md
 ```markdown
-# Ashura run <run>
+# Sonny Boy run <run>
 phase: setup | decompose | running | integrate | paused | closed
 mode: nested | flat
 working: <branch>
@@ -41,16 +41,16 @@ document-update: yes | no
 ts	phase	decision	why	evidence	result
 ```
 
-## project.md (optional, per repo: `<top>/.claude/ashura/project.md`)
+## project.md (optional, per repo: `<top>/.claude/sonny-boy/project.md`)
 ```markdown
-# Ashura project facts
+# Sonny Boy project facts
 python: <path relative to top or absolute, e.g. .venv/bin/python>
 tests: <unit/integration command, e.g. "<python> -m pytest -q">
 frontend_dir: <e.g. frontend, or none>
 frontend_install: <e.g. npm ci>
 e2e_mock: <how to run Playwright mock lane, e.g. "cd frontend && PW_PORT=<vite> npx playwright test">
 real_stack:
-  services: <e.g. "docker start my-db" — Ashura asks the user to run it>
+  services: <e.g. "docker start my-db" — Sonny Boy asks the user to run it>
   backend: <e.g. "<python> -m uvicorn app.main:app --port <backend>">
   frontend: <e.g. "cd frontend && VITE_API_TARGET=http://localhost:<backend> npx vite --port <vite>">
   health: <e.g. "curl -sf http://localhost:<backend>/health">
@@ -60,7 +60,7 @@ notes: <repo-specific traps>
 
 ## Lead kickoff
 ```
-You are ashura-lead for <Tn> "<title>" in run <run>.
+You are sonny-boy-lead for <Tn> "<title>" in run <run>.
 mode: new | resume
 worktree: <wt abs path>
 branch: <branch>
@@ -89,7 +89,7 @@ Phase ∈ plan, red, green, verify, review, verified, PR, merged, paused, failed
 - <bullet per meaningful change>
 
 ## Scope
-Subtask <Tn> of Ashura run <run>. Boundary: <globs>. Out of scope: <items>.
+Subtask <Tn> of Sonny Boy run <run>. Boundary: <globs>. Out of scope: <items>.
 
 ## Tradeoffs
 <what was chosen over what, and why>

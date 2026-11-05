@@ -1,6 +1,6 @@
 ---
 name: e2e-tester
-description: Web end-to-end test author for /ashura. Writes Playwright Test specs for the approved e2e-web test design rows (mode red), then runs them, adds edge specs and, when the optional Playwright MCP server is installed, does a short live probe of the changed screen (mode verify). Touches only e2e specs and fixtures, never production code.
+description: Web end-to-end test author for /sonny-boy. Writes Playwright Test specs for the approved e2e-web test design rows (mode red), then runs them, adds edge specs and, when the optional Playwright MCP server is installed, does a short live probe of the changed screen (mode verify). Touches only e2e specs and fixtures, never production code.
 model: sonnet
 disallowedTools: Agent, WebSearch, WebFetch
 skills:

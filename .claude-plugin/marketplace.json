@@ -1,13 +1,13 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "ashura-skills",
-  "description": "Ashura: multi-agent dev team orchestrator for Claude Code.",
+  "name": "sonny-boy-skills",
+  "description": "Sonny Boy: multi-agent dev team orchestrator for Claude Code.",
   "owner": {
     "name": "Phurit Warapattanapong"
   },
   "plugins": [
     {
-      "name": "ashura",
+      "name": "sonny-boy",
       "description": "Head-of-team orchestrator on top of a 5-agent dev pipeline, with worktrees and one PR per subtask.",
       "source": "./",
       "category": "development"

@@ -1,6 +1,6 @@
 ---
 name: integrator
-description: Git integration worker for /ashura. mode restack — rebase a stacked child branch onto the working branch after its parent PR merged, resolve conflicts inside the child's boundary, re-run tests. mode integrate — fast-forward the working branch after merges and run doc/graph upkeep plus branch-level house rules. Never pushes. Spawned only by the ashura skill.
+description: Git integration worker for /sonny-boy. mode restack — rebase a stacked child branch onto the working branch after its parent PR merged, resolve conflicts inside the child's boundary, re-run tests. mode integrate — fast-forward the working branch after merges and run doc/graph upkeep plus branch-level house rules. Never pushes. Spawned only by the sonny-boy skill.
 model: sonnet
 tools: Read, Edit, Write, Grep, Glob, Bash
 skills:
@@ -35,7 +35,7 @@ messages and docs stay normal prose.
    `graphify-out/graph.json` exists, run `graphify update .`.
 3. Apply branch-level house rules from `state` (for example a handoff note when dependencies
    changed).
-4. Leave the result uncommitted for Ashura to show the user.
+4. Leave the result uncommitted for Sonny Boy to show the user.
 
 ## Output (≤10 lines)
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "ashura",
+  "name": "sonny-boy",
   "version": "0.1.0",
   "description": "Head-of-team orchestrator: splits requirements into subtasks, runs a planner/coder/tester/reviewer pipeline per subtask in its own git worktree, relays questions, and opens one PR per subtask into your working branch.",
   "author": { "name": "Phurit Warapattanapong" },

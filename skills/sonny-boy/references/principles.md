@@ -1,6 +1,6 @@
-# Ashura principles
+# Sonny Boy principles
 
-Rules for Ashura and every agent it spawns. Adapted from pstack (Lauren Tan,
+Rules for Sonny Boy and every agent it spawns. Adapted from pstack (Lauren Tan,
 `cursor/plugins/pstack`); only the parts that fit Claude Code are kept.
 
 ## Scoping
@@ -43,7 +43,7 @@ Rules for Ashura and every agent it spawns. Adapted from pstack (Lauren Tan,
 
 ## Output
 14. **Guard the context window.** Kickoffs pass file paths, never file contents. Agents return
-    only their STATUS block; detail lives in task files. Ashura reads task files only when a gate
+    only their STATUS block; detail lives in task files. Sonny Boy reads task files only when a gate
     needs them.
 15. **Status only on tracked change.** Post the status board when a tracked field changes, not on
     every notification. The close report states: landed, PR states, dropped, waiting.

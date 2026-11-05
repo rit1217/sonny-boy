@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Optional: add Ashura's permission allowlist to a Claude Code settings file, so the agents'
+# Optional: add Sonny Boy's permission allowlist to a Claude Code settings file, so the agents'
 # routine commands (git add/commit, tests, worktree add) do not prompt. A plugin cannot ship
 # permission rules, so this is a separate step. Works on macOS, Linux/WSL and Windows Git Bash.
 #
@@ -7,7 +7,7 @@
 #   scripts/setup-permissions.sh --file PATH      # another settings file, e.g. <repo>/.claude/settings.local.json
 #   scripts/setup-permissions.sh --dry-run        # show how many rules would be added
 #
-# The settings file is backed up to <same dir>/backups/ashura-<timestamp>/ before it changes.
+# The settings file is backed up to <same dir>/backups/sonny-boy-<timestamp>/ before it changes.
 # git push, gh pr create/edit, git worktree remove and branch deletion are deliberately NOT
 # allowed, so they always ask you.
 set -euo pipefail
@@ -23,7 +23,7 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-ALLOW='["Bash(git status*)","Bash(git diff*)","Bash(git log*)","Bash(git show*)","Bash(git rev-parse*)","Bash(git add *)","Bash(git commit *)","Bash(git worktree list*)","Bash(git worktree add *)","Bash(graphify *)","Bash(* -m pytest*)","Bash(npm test*)","Bash(npm run test*)","Bash(npm run build*)","Bash(npm ci*)","Bash(npx playwright test*)","Bash(npx playwright install*)","Bash(gh pr view*)","Bash(gh pr checks*)","Bash(gh auth status*)","Edit(.claude/ashura/**)","Edit(.claude/worktrees/**)"]'
+ALLOW='["Bash(git status*)","Bash(git diff*)","Bash(git log*)","Bash(git show*)","Bash(git rev-parse*)","Bash(git add *)","Bash(git commit *)","Bash(git worktree list*)","Bash(git worktree add *)","Bash(graphify *)","Bash(* -m pytest*)","Bash(npm test*)","Bash(npm run test*)","Bash(npm run build*)","Bash(npm ci*)","Bash(npx playwright test*)","Bash(npx playwright install*)","Bash(gh pr view*)","Bash(gh pr checks*)","Bash(gh auth status*)","Edit(.claude/sonny-boy/**)","Edit(.claude/worktrees/**)"]'
 
 NODE_MERGE='
 const fs=require("fs"),[p,allow,dry]=process.argv.slice(1);
@@ -56,7 +56,7 @@ fi
 if [ "$DRY" = 1 ] || [ "$n" = 0 ]; then echo "$FILE: $n rule(s) to add"; exit 0; fi
 mkdir -p "$(dirname "$FILE")"
 if [ -f "$FILE" ]; then
-  B="$(dirname "$FILE")/backups/ashura-$(date +%Y%m%d-%H%M%S)"
+  B="$(dirname "$FILE")/backups/sonny-boy-$(date +%Y%m%d-%H%M%S)"
   mkdir -p "$B"; cp "$FILE" "$B/$(basename "$FILE")"; echo "backup: $B/$(basename "$FILE")"
 fi
 merge 0 >/dev/null
