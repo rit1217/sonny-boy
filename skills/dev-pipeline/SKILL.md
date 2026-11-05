@@ -21,9 +21,10 @@ result; wait for it. Keep a short running log for the user: phase, status, next 
 
 ## Phase 1 — Plan
 1. Spawn `planner` (foreground) with requirement + `artifact_dir`.
-2. `STATUS: QUESTIONS` → relay the round to user verbatim-ish (keep numbering + recommendations).
-   Use AskUserQuestion when questions are multiple-choice and ≤4; otherwise plain text and wait.
-   Send answers back to the SAME planner with SendMessage. Repeat.
+2. `STATUS: QUESTIONS` → ask the round with one AskUserQuestion box: per question `header` =
+   its title (≤12 chars), `question` = context + question, the planner's options (recommended
+   first, labelled `(Recommended)`). Send the answers verbatim back to the SAME planner with
+   SendMessage. Repeat.
 3. `STATUS: PLAN_READY` → show plan summary + path.
 4. **GATE 1**: user approves plan? Feedback → SendMessage to planner → back to step 3.
    Do not proceed without explicit approval.
