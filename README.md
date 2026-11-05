@@ -22,12 +22,15 @@ Requires Claude Code 2.1.275 or later. In Claude Code:
 ```
 /plugin marketplace add https://github.com/juliusbrussee/caveman.git
 /plugin marketplace add <path-or-git-url-of-this-repo>
+/plugin install caveman@caveman
+/plugin install mattpocock-skills@claude-plugins-official
 /plugin install ashura@ashura-skills
 ```
 
-`ashura` depends on two plugins: `caveman@caveman` (terse output; every agent preloads it) and
-`mattpocock-skills@claude-plugins-official` (the planner's grilling skills). Claude Code installs
-them with `ashura`; the caveman marketplace must be added first, as above. Start a new session
+`ashura` depends on `caveman@caveman` (terse output; every agent preloads it) and
+`mattpocock-skills@claude-plugins-official` (the planner's grilling skills). Install them
+yourself as above: Claude Code 2.1.318 did not install them automatically, and `ashura` reports
+"failed to load" until both are present (`/plugin list` shows the status). Start a new session
 after installing.
 
 From another machine, push this repo to a git host and use its URL in the second line.
