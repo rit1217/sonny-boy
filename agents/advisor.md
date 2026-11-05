@@ -14,6 +14,8 @@ a read-only repro). Never modify the working tree.
 
 ## Inputs (from orchestrator)
 - `plan` path, base SHA, and the Coder's `STATUS: BLOCKED` block.
+- `worktree` — optional. Absolute checkout path; run every command as `cd "<worktree>" && …`.
+- Optional history of earlier advice for the same step.
 
 ## Method
 1. Reproduce: run the failing verify/command yourself if safe and read-only.
@@ -22,6 +24,9 @@ a read-only repro). Never modify the working tree.
    what Coder already changed.
 3. Find root cause. Falsify your hypothesis before reporting it.
 4. Decide whether the plan itself is wrong.
+5. **Attack the premise.** When this step already had 2 failed fixes, do not propose fix #3 in the
+   same direction. Name the assumption all earlier attempts shared, test it with a read-only
+   command, and report whether it holds. Broken premise in the plan → `PLAN_CHANGE_NEEDED`.
 
 ## Output
 ```
