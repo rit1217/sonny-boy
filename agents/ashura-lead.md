@@ -44,7 +44,7 @@ continue from the step it unblocks.
 Write `status.md`. `mode: resume` → read `status.md`, `decisions.tsv`, `git log --oneline -10`,
 `git status --short`; continue at the recorded step.
 
-**L1 Plan.** Spawn `planner` with: subtask goal as requirement, `brief` = done evidence + file
+**L1 Plan.** Spawn `ashura:planner` with: subtask goal as requirement, `brief` = done evidence + file
 boundary from `subtask`, `qa_log`, `worktree`, `artifact_dir`.
 - `QUESTIONS` → return `STATUS: QUESTIONS` followed by the planner's structured round unchanged.
   On `ANSWERS in qa.md round <k>` → spawn a fresh planner (same inputs; it reads `qa.md` and
@@ -55,24 +55,24 @@ boundary from `subtask`, `qa_log`, `worktree`, `artifact_dir`.
   Then return `STATUS: PLAN_READY` + `plan: <path>` + AC count + test rows count.
 - `APPROVED` → L2. `REVISE: <text>` → append text to `qa.md`, fresh planner, back to the check.
 
-**L2 Red.** Spawn `tester` `mode: red` (unit/integration rows). If the plan has `e2e-web` rows,
-then spawn `e2e-tester` `mode: red` with `port_base` (sequential). Both `RED_READY` →
+**L2 Red.** Spawn `ashura:tester` `mode: red` (unit/integration rows). If the plan has `e2e-web` rows,
+then spawn `ashura:e2e-tester` `mode: red` with `port_base` (sequential). Both `RED_READY` →
 `git add <test files> && git commit -m "test(<scope>): <what the tests pin down>"`.
 `TEST_DESIGN_GAP` → `ESCALATE` with the gap.
 
-**L3 Green.** Spawn `coder` with `plan`, `tests_first: true`. `BLOCKED` → fresh `advisor` (plan,
-base, BLOCKED block, `worktree`) → fresh `coder` with the advice (max 2 per step).
+**L3 Green.** Spawn `ashura:coder` with `plan`, `tests_first: true`. `BLOCKED` → fresh `ashura:advisor` (plan,
+base, BLOCKED block, `worktree`) → fresh `ashura:coder` with the advice (max 2 per step).
 `PLAN_CHANGE_NEEDED` → `ESCALATE`. Done → run the red tests; all must pass, else back to coder
 (counts toward the 2).
 
-**L4 Verify.** Spawn `tester` `mode: verify`. Then `e2e-tester` `mode: verify` lane `mock` if the
+**L4 Verify.** Spawn `ashura:tester` `mode: verify`. Then `ashura:e2e-tester` `mode: verify` lane `mock` if the
 plan has `e2e-web` rows. Real-stack rows → return `STATUS: NEED_REAL_STACK` (rows listed); on
-`LOCK GRANTED` spawn `e2e-tester` `mode: verify` lane `real-stack`; tell Ashura `LOCK RELEASED`
+`LOCK GRANTED` spawn `ashura:e2e-tester` `mode: verify` lane `real-stack`; tell Ashura `LOCK RELEASED`
 in your next STATUS. `CODE_BUGS` → fresh coder with the bug list → re-run the tester that found
 them (max 2 loops). A disputed CODE_BUG vs TEST_BUG call → fresh advisor decides.
 
-**L5 Review.** Spawn fresh `reviewer` (plan, base_ref, `worktree`). Save output to
-`<task_dir>/review-<N>.md`. Proven BLOCKER/MAJOR → fresh coder with those findings → `tester`
+**L5 Review.** Spawn fresh `ashura:reviewer` (plan, base_ref, `worktree`). Save output to
+`<task_dir>/review-<N>.md`. Proven BLOCKER/MAJOR → fresh coder with those findings → `ashura:tester`
 `mode: verify` → fresh reviewer N+1 (max 2 cycles). `[UNVERIFIED]` and MINOR → leave for the PR
 gate.
 

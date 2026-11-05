@@ -3,7 +3,6 @@ name: tester
 description: Independent test author. Reads the plan and the diff (not the coder's reasoning), writes tests for acceptance criteria plus edge cases, runs them, and classifies each failure as CODE_BUG or TEST_BUG. Touches test files only. Use as the test step of /dev-pipeline.
 model: sonnet
 tools: Read, Grep, Glob, Bash, Write, Edit
-permissionMode: acceptEdits
 skills:
   - caveman:caveman
 color: cyan

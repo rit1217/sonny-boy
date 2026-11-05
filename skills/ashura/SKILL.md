@@ -13,8 +13,9 @@ user: subagents cannot ask the user anything. You never write production code or
 ## Start of every invocation
 1. Caveman full must be active. If the caveman hook did not activate it, invoke the
    `caveman:caveman` skill (level `full`) now.
-2. Read `references/principles.md` and `references/templates.md` (next to this file). They are
-   rules, not suggestions.
+2. Read `${CLAUDE_SKILL_DIR}/references/principles.md` and
+   `${CLAUDE_SKILL_DIR}/references/templates.md`. They are rules, not suggestions.
+   Agents are plugin-scoped: always spawn them as `ashura:<name>`.
 3. Token budget: no recap, no narration between tool calls, never paste raw agent output, never
    restate what a box or table already shows. Files, commits and PR bodies use normal prose, short.
 
@@ -61,10 +62,10 @@ user: subagents cannot ask the user anything. You never write production code or
 
 ## Phase 1 — Decompose
 1. Post 2 lines: goal in your own words; smallest change that meets it.
-2. Spawn `decomposer` (foreground) with: requirements verbatim, your 2 lines, `run_dir`, path of
+2. Spawn `ashura:decomposer` (foreground) with: requirements verbatim, your 2 lines, `run_dir`, path of
    `state.md`.
 3. `STATUS: QUESTIONS` → question relay with header prefix `Ashura`; answers to
-   `<run_dir>/qa.md`; spawn a fresh `decomposer` with `qa_log` = that file.
+   `<run_dir>/qa.md`; spawn a fresh `ashura:decomposer` with `qa_log` = that file.
 4. `STATUS: SUBTASKS` → show its table + dependency graph (one line per edge) → AskUserQuestion:
    Approve (Recommended) / Revise (Other text goes to a fresh decomposer). Log decision.
 5. Any subtask needs `e2e-web` and repo has no `playwright.config.*` → decomposer adds `T0 e2e
@@ -76,8 +77,8 @@ user: subagents cannot ask the user anything. You never write production code or
 - Per ready subtask: `git worktree add -b <branch> "<wt>" <base-ref>`; create `task_dir`; assign
   `port_base = 8100 + 10*N` (N = subtask number) when the repo has a web stack.
 - Max 3 active leads; the rest wait in `state.md` → `## Queue`.
-- Spawn all ready leads in ONE message, `run_in_background: true`, agent `ashura-lead`, kickoff from
-  templates. Record each agent id in `state.md`.
+- Spawn all ready leads in ONE message, `run_in_background: true`, agent `ashura:ashura-lead`, kickoff from
+  templates (include `templates: ${CLAUDE_SKILL_DIR}/references/templates.md`). Record each agent id in `state.md`.
 - First lead notification says it has no `Agent` tool → set `mode: flat` in `state.md` and follow
   "Flat mode".
 
@@ -90,7 +91,7 @@ On each lead notification, read only its STATUS block and branch:
 | `PLAN_READY` | AC + test design gate |
 | `ESCALATE` | show user the subtask, the blocker, the options → answer to `qa.md` → SendMessage lead |
 | `NEED_REAL_STACK` | lock free → set `real_stack_lock: <Tn>` in `state.md`, SendMessage lead `LOCK GRANTED`; DB/service down → tell user the start command from `project.md`. Lock taken → queue the request |
-| `READY_FOR_PR` | release lock if held; spawn fresh `verifier` (background) → `VERIFIED` → PR batch; `NOT_VERIFIED` → SendMessage lead the failing lines |
+| `READY_FOR_PR` | release lock if held; spawn fresh `ashura:verifier` (background) → `VERIFIED` → PR batch; `NOT_VERIFIED` → SendMessage lead the failing lines |
 | `PAUSED` | record; nothing else |
 | `FAILED` | retry by cause, max 2 (fresh lead `mode: resume`), then ask user: replan / drop / take over |
 
@@ -126,12 +127,12 @@ plan / Revise (Other). Approve → SendMessage lead `APPROVED`. Revise → SendM
 
 ## Stack upkeep (on `status`, on resume, after any PR event)
 For each child whose parent PR is `MERGED` (`gh pr view <parent-branch> --json state`): spawn
-`integrator` `mode: restack` (child wt, child branch, `origin/<working>`) → `DONE` → ask user →
+`ashura:integrator` `mode: restack` (child wt, child branch, `origin/<working>`) → `DONE` → ask user →
 `git -C "<wt>" push --force-with-lease` + `gh pr edit <child-branch> --base <working>`.
 `CONFLICT` → show files + why → user decides.
 
 ## Phase 4 — Integrate (after the user merges PRs)
-Ask first. Then `integrator` `mode: integrate` in `<top>` on `working`: `git pull --ff-only`,
+Ask first. Then `ashura:integrator` `mode: integrate` in `<top>` on `working`: `git pull --ff-only`,
 `/document-update` if that command exists else `graphify update .` if a graph exists, house rules
 that apply at branch level. Show `git diff --stat` → ask to commit → commit with house-rule
 attribution. Never push without asking.
@@ -145,12 +146,12 @@ decisions still waiting. Offer worktree cleanup listing exact paths → on yes `
 - `pause` → SendMessage each active lead `PAUSE`. Lead finishes current step, makes a `wip:` commit,
   writes `status.md`, returns `PAUSED`. Set `phase: paused`.
 - `resume [run]` → read `state.md`, run `decisions.tsv`, each task's `status.md`, and
-  `git -C "<wt>" log --oneline -5` + `status --short`. Spawn fresh `ashura-lead` with `mode: resume`
+  `git -C "<wt>" log --oneline -5` + `status --short`. Spawn fresh `ashura:ashura-lead` with `mode: resume`
   per unfinished subtask. Re-ask only queued questions that have no answer in `qa.md`.
 
 ## Flat mode
-Background leads cannot nest agents on this install. You run the `ashura-lead` procedure
-(`~/.claude/agents/ashura-lead.md`, steps L0–L6) per subtask yourself: spawn the pipeline agents
+Background leads cannot nest agents on this install. You run the `ashura:ashura-lead` procedure
+(`${CLAUDE_PLUGIN_ROOT}/agents/ashura-lead.md`, steps L0–L6) per subtask yourself: spawn the pipeline agents
 in the background named `<Tn>-<role>`, keep one writer per worktree, keep every rule there. You
 still never edit code or tests.
 

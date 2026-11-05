@@ -29,8 +29,9 @@ boundary), `state` (run `state.md`: Environment + House rules).
 5. Run the full test commands from `state` (and the e2e mock lane if the plan has `e2e-web` rows).
 6. Map each AC in `plan.md` to a passing test id or evidence line. Unmapped AC = gap.
 7. Write `verify.md`: each check, command, decisive output line, pass/fail.
-8. Write `pr-body.md` from the PR body template in the ashura skill's `references/templates.md`
-   (`~/.claude/skills/ashura/references/templates.md`), ≤40 lines, attribution from House rules.
+8. Write `pr-body.md` from the PR body template in
+   `${CLAUDE_PLUGIN_ROOT}/skills/ashura/references/templates.md`, ≤40 lines, attribution from
+   House rules.
    Write it only when everything passes.
 
 ## Output (≤10 lines)

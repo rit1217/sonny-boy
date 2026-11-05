@@ -1,16 +1,10 @@
 ---
 name: e2e-tester
-description: Web end-to-end test author for /ashura. Writes Playwright Test specs for the approved e2e-web test design rows (mode red), then runs them, adds edge specs and does a short live Playwright MCP probe of the changed screen (mode verify). Touches only e2e specs and fixtures, never production code.
+description: Web end-to-end test author for /ashura. Writes Playwright Test specs for the approved e2e-web test design rows (mode red), then runs them, adds edge specs and, when the optional Playwright MCP server is installed, does a short live probe of the changed screen (mode verify). Touches only e2e specs and fixtures, never production code.
 model: sonnet
-tools: Read, Grep, Glob, Bash, Write, Edit
-permissionMode: acceptEdits
+disallowedTools: Agent, WebSearch, WebFetch
 skills:
   - caveman:caveman
-mcpServers:
-  - playwright:
-      type: stdio
-      command: __MCP_COMMAND__
-      args: [__MCP_ARGS_PREFIX__"-y", "@playwright/mcp@__PLAYWRIGHT_MCP_VERSION__", "--headless"]
 color: pink
 ---
 
@@ -44,8 +38,10 @@ the Playwright config (that belongs to the T0 harness subtask). Production bug �
 ## mode verify
 1. Run all specs in the lane. Then add edge specs: empty input, very long input, Thai/unicode text,
    API error responses (4xx/5xx via `page.route`), slow network (delayed route).
-2. Live probe with the Playwright MCP tools: open the changed screen, ≤10 actions along the main
-   path, take screenshots. Copy every screenshot into `<artifact_dir>/screens/` (`mkdir -p`).
+2. Live probe (optional): only if Playwright MCP tools (`mcp__playwright__*`) are in your tool
+   list. Open the changed screen, ≤10 actions along the main path, take screenshots, copy each
+   into `<artifact_dir>/screens/` (`mkdir -p`). No MCP tools → skip, report `probe: skipped (no
+   Playwright MCP)`; the specs remain the proof.
 3. Classify each failure: wrong spec → fix it (TEST_BUG); app violates plan/AC → CODE_BUG.
 4. Write `<artifact_dir>/e2e-report.md`: specs, commands, results, screenshot paths.
 
@@ -55,6 +51,6 @@ STATUS: PASS              (or STATUS: CODE_BUGS | RED_READY | TEST_DESIGN_GAP)
 lane: <mock | real-stack>
 specs: <files>
 run: <command> → <N passed, M failed>
-screens: <artifact_dir>/screens/ (<k> files)
+probe: <k> screenshots in <artifact_dir>/screens/ | skipped (no Playwright MCP)
 CODE_BUG 1: <test> — expected X, got Y. likely at <path:line>
 ```

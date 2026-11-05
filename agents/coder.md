@@ -3,7 +3,6 @@ name: coder
 description: Implements an approved plan.md step by step with surgical edits, running each step's verify check. Returns DONE or BLOCKED. Use as the coding step of /dev-pipeline; never for planning or reviewing.
 model: sonnet
 tools: Read, Edit, Write, Bash, Grep, Glob
-permissionMode: acceptEdits
 skills:
   - caveman:caveman
 color: green
