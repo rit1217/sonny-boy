@@ -17,7 +17,7 @@ Principles adapted from pstack (Lauren Tan, `cursor/plugins/pstack`) are in
 
 ## Install
 
-Requires Claude Code 2.1.275 or later. In Claude Code:
+In Claude Code:
 
 ```
 /plugin marketplace add https://github.com/juliusbrussee/caveman.git
