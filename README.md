@@ -15,6 +15,21 @@ Sonny Boy is a Claude Code plugin: a head-of-team orchestrator on top of a 5-age
 Principles adapted from pstack by Lauren Tan (see [Credits](#credits)) are in
 `skills/sonny-boy/references/principles.md`.
 
+## Why "Sonny Boy"
+
+The plugin is named after [*Sonny Boy*](https://en.wikipedia.org/wiki/Sonny_Boy_(TV_series)),
+the 2021 original anime by Madhouse, written and directed by Shingo Natsume. In the anime, a group
+of students drifts through many parallel worlds and jumps across time, trying to understand
+themselves and the world they are in.
+
+The plugin works the same way. Each subtask lives in its own world (a git worktree on its own
+branch), where a small team of agents works it out. The main agent plays the part of Nagara: it
+controls the jumps between worlds and is the storyteller who tells you, the viewer, what is
+happening in each of them.
+
+Sonny Boy (the plugin) is a fan tribute. It is not affiliated with or endorsed by Madhouse,
+Shochiku or the creators of the anime, and it contains no material from the series.
+
 ## Install
 
 In Claude Code:
