@@ -1,5 +1,25 @@
 # Sonny Boy
 
+```text
+                                                          \  | |  /
+                            .                              \ | | /
+          .--.                                              \   /      .
+        .-(    ).     .                                      | |
+        (___.__)__)                                          | |
+                               _                             | |
+       .                    _( )_  .                         | |        .
+  .                        (_____)           .-''''-.        | |
+                     .                     ./////////\.      | |
+                                          ////////////\     | |
+  .                                       |////////////|    | |
+                      .                   |///////////'|    | |
+                                           \/////////'/     | |
+                                      _____\`------'________| |
+                                     /                         |
+                                    /                           \
+                                   /                             \
+```
+
 Sonny Boy is a Claude Code plugin: a head-of-team orchestrator on top of a 5-agent dev pipeline
 (planner → coder → advisor → tester → reviewer). It does what a single pipeline cannot:
 
