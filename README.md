@@ -12,7 +12,7 @@ Ashura is a Claude Code plugin: a head-of-team orchestrator on top of a 5-agent 
 - runs a fresh `verifier` before each PR and opens one PR per subtask into your **working
   branch**, never `main`. You merge.
 
-Principles adapted from pstack (Lauren Tan, `cursor/plugins/pstack`) are in
+Principles adapted from pstack by Lauren Tan (see [Credits](#credits)) are in
 `skills/ashura/references/principles.md`.
 
 ## Install
@@ -125,3 +125,21 @@ decomposer); Sonnet for writing code or tests (coder, tester, e2e-tester, verifi
 
 The first commit holds the 5 original pipeline agents and `/dev-pipeline` unchanged; later
 commits show each change as a diff.
+
+## Credits
+
+Ashura builds on the work of others:
+
+- **[Caveman](https://github.com/JuliusBrussee/caveman)** by Julius Brussee — the terse
+  communication mode that Ashura and every agent use to save tokens. Required plugin.
+- **[Matt Pocock's skills](https://github.com/mattpocock/skills)** — the
+  [grill-me](https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me) /
+  [grilling](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling)
+  approach the planner uses to question requirements before planning, plus
+  [domain-modeling](https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling).
+  Required plugin.
+- **[pstack](https://github.com/cursor/plugins/tree/main/pstack)** by Lauren Tan
+  ([poteto](https://github.com/poteto)) — the orchestration principles in
+  `skills/ashura/references/principles.md`: done evidence and file boundaries per subtask,
+  verifier ≠ author, proof-backed findings, attack the premise, pause safely, and the PR format.
+  Adapted, not copied; no pstack code is included.
