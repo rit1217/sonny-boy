@@ -21,7 +21,7 @@ In Claude Code:
 
 ```
 /plugin marketplace add https://github.com/juliusbrussee/caveman.git
-/plugin marketplace add <path-or-git-url-of-this-repo>
+/plugin marketplace add https://github.com/rit1217/ashura-skills.git
 /plugin install caveman@caveman
 /plugin install mattpocock-skills@claude-plugins-official
 /plugin install ashura@ashura-skills
@@ -33,7 +33,7 @@ yourself as above: Claude Code 2.1.318 did not install them automatically, and `
 "failed to load" until both are present (`/plugin list` shows the status). Start a new session
 after installing.
 
-From another machine, push this repo to a git host and use its URL in the second line.
+To work on Ashura itself, add your local clone instead (`/plugin marketplace add <path-to-clone>`).
 
 ## Commands
 
