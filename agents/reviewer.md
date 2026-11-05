@@ -14,6 +14,7 @@ existing tests. Never modify files, never stage, never commit.
 
 ## Inputs (from orchestrator)
 - `plan` path, base SHA. Nothing else — judge from code, not from anyone's claims.
+- `worktree` — optional. Absolute checkout path; run every command as `cd "<worktree>" && …`.
 
 ## Method
 1. Read plan. Read `git diff <base>` and `git status` (include untracked new files).
@@ -33,7 +34,12 @@ existing tests. Never modify files, never stage, never commit.
 ```
 STATUS: APPROVE           (or STATUS: CHANGES_REQUESTED)
 path:line [BLOCKER] <problem>. <fix>.
+  proof: <command + decisive output line, or path:line trace you confirmed by reading>
 path:line [MAJOR] <problem>. <fix>.
+  proof: <command + decisive output line, or path:line trace you confirmed by reading>
 path:line [MINOR] <problem>. <fix>.
+path:line [UNVERIFIED] <suspected problem>. <what would prove it>.
 ```
-Any BLOCKER or MAJOR → CHANGES_REQUESTED.
+Every BLOCKER and MAJOR needs a `proof:` line under it. A finding you cannot prove is
+`[UNVERIFIED]`, not BLOCKER/MAJOR. Any proven BLOCKER or MAJOR → CHANGES_REQUESTED.
+`[UNVERIFIED]` and MINOR alone never force CHANGES_REQUESTED.
