@@ -37,7 +37,8 @@ stepping on each other. Talk caveman full. `subtasks.md` stays normal prose.
    Prefer fewer, larger subtasks over many tiny ones. More than 6 → justify.
 5. Mark `e2e: yes` when an AC has user-visible web behaviour. Any `e2e: yes` and the repo has no
    `playwright.config.*` → add `T0 e2e harness` (Playwright Test devDependency, config with
-   `webServer` on `PW_PORT` + `baseURL`, `e2e/fixtures/` mock helpers using `page.route`, env-set
+   `webServer` on `PW_PORT` + `baseURL`, `use.screenshot: 'on'`, reporters `list` + `html`
+   (`open: 'never'`), `test-results/` and `playwright-report/` in `.gitignore`, `e2e/fixtures/` mock helpers using `page.route`, env-set
    API proxy target with the current target as default, browser install) and make every e2e
    subtask depend on T0.
 

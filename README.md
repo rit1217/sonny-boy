@@ -113,6 +113,10 @@ subtask that adds Playwright Test to that repo and installs a browser
 (`npx playwright install chromium`; on Linux/WSL `npx playwright install --with-deps chromium`,
 which needs sudo). The specs it commits are the proof; nothing global is required.
 
+Every spec takes a screenshot. Before asking you to open PRs, Sonny Boy lists them as clickable
+links (failures first) with the command to open the full Playwright HTML report. They are kept in
+the subtask folder, not attached to the PR.
+
 **Optional live probe.** If you also install the Playwright MCP server, the `e2e-tester` agent
 clicks through the changed screen and saves screenshots to the subtask folder. Without it, that
 step is skipped and reported as skipped.

@@ -43,7 +43,12 @@ the Playwright config (that belongs to the T0 harness subtask). Production bug �
    into `<artifact_dir>/screens/` (`mkdir -p`). No MCP tools → skip, report `probe: skipped (no
    Playwright MCP)`; the specs remain the proof.
 3. Classify each failure: wrong spec → fix it (TEST_BUG); app violates plan/AC → CODE_BUG.
-4. Write `<artifact_dir>/e2e-report.md`: specs, commands, results, screenshot paths.
+4. Save evidence outside the worktree (it is removed at close), after the final run:
+   `mkdir -p <artifact_dir>/screens`; copy each spec screenshot from `test-results/` to
+   `<artifact_dir>/screens/<test id>-<pass|fail>.png`; copy `playwright-report/` to
+   `<artifact_dir>/playwright-report/`.
+5. Write `<artifact_dir>/e2e-report.md`: specs, commands, results, and a `## Screenshots` list (one
+   line each: test id, pass/fail, absolute path — spec and probe screenshots).
 
 ## Output (≤15 lines)
 ```
@@ -51,6 +56,7 @@ STATUS: PASS              (or STATUS: CODE_BUGS | RED_READY | TEST_DESIGN_GAP)
 lane: <mock | real-stack>
 specs: <files>
 run: <command> → <N passed, M failed>
+screens: <n> spec screenshots in <artifact_dir>/screens/
 probe: <k> screenshots in <artifact_dir>/screens/ | skipped (no Playwright MCP)
 CODE_BUG 1: <test> — expected X, got Y. likely at <path:line>
 ```

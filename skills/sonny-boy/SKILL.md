@@ -131,6 +131,10 @@ plan / Revise (Other). Approve → SendMessage lead `APPROVED`. Revise → SendM
 ## PR gate (batched)
 1. Collect subtasks with `VERIFIED`. Per subtask show: one-line summary, `git -C "<wt>" diff --stat
    <base-ref>...HEAD`, test result line, AC → evidence lines from `verify.md`, open MINOR findings.
+   Subtask has `<task_dir>/e2e-report.md` → also show its `## Screenshots` as clickable markdown
+   links (`[<test id> pass|fail](<abs path>)`), failures first, and the line
+   `npx playwright show-report "<task_dir>/playwright-report"` (run from the frontend dir). Never
+   attach screenshots to the PR.
 2. AskUserQuestion multiSelect "Open PRs for…" (≤4 per box).
 3. Working branch missing on origin → ask to push it first (`git push -u origin <working>`).
 4. `gh` missing or not authed → tell the user `! gh auth login` (README has per-OS install) and wait.
