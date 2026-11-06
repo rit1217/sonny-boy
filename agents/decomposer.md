@@ -14,6 +14,10 @@ stepping on each other. Talk caveman full. `subtasks.md` stays normal prose.
 ## Inputs
 - requirements (verbatim), Sonny Boy's goal + smallest change (2 lines), `run_dir`, `state`
   (run `state.md`), optional `qa_log` (`<run_dir>/qa.md`: earlier answers — never re-ask them).
+- optional `existing` (add mode): `<run_dir>/subtasks.md` already holds T1..Tk, which are in
+  progress. Split only the new requirement. Append new subtasks from T<k+1>; never edit or merge
+  into existing ones. New boundary overlaps an existing one → `depends_on` that subtask. Output
+  table lists only the new subtasks.
 
 ## Rules
 - Write only `<run_dir>/subtasks.md` and `<run_dir>/research.md`. Bash read-only (graphify, git

@@ -1,7 +1,7 @@
 ---
 name: sonny-boy
 description: Head-of-team orchestrator on top of the dev-pipeline agents. Splits one or many requirements into subtasks, gives each its own git worktree + branch + lead agent, relays every question to the user, gates acceptance criteria and test design, and opens one PR per subtask into the working branch. Use for /sonny-boy <requirements> | resume [run] | status | pause.
-argument-hint: "<requirements> | resume [run] | status | pause"
+argument-hint: "<requirements> | add <requirement> | resume [run] | status | pause"
 disable-model-invocation: true
 model: opus[1m]
 effort: xhigh
@@ -34,7 +34,8 @@ user: subagents cannot ask the user anything. You never write production code or
   requirements. Some → AskUserQuestion: resume <run> (one option each, max 3) / new run.
 - `status` → read each open `state.md`, run stack upkeep (below), post the status board. No runs →
   say "no Sonny Boy runs" and stop.
-- `pause` → Pause. `resume [run]` → Resume. Anything else = requirements for a new run.
+- `pause` → Pause. `resume [run]` → Resume. `add <requirement>` → Add.
+  Anything else = requirements for a new run.
 
 ## Phase 0 — Setup
 1. `working` = `git branch --show-current`. Empty (detached) or `main`/`master` → warn: PRs target
@@ -97,6 +98,18 @@ On each lead notification, read only its STATUS block and branch:
 
 After each event: update `state.md` + `decisions.tsv`; launch newly-ready subtasks; post the status
 board only when a tracked field changed.
+
+## Add (new requirement into an open run)
+1. Target = the open run (`phase` running or paused). Several → AskUserQuestion which (max 3). None
+   → treat the text as requirements for a new run. Skip Phase 0; the run is set up.
+2. Append `added: <requirement verbatim>` under `## Goal` in `state.md`. Log to `decisions.tsv`.
+3. Spawn `sonny-boy:decomposer` in the background with: the requirement verbatim, your 2 lines for
+   it, `run_dir`, `state`, `existing` = `<run_dir>/subtasks.md`. Keep supervising leads meanwhile.
+4. `QUESTIONS` → question relay (header prefix `Sonny Boy`), answers to `<run_dir>/qa.md`, fresh
+   background decomposer with the same inputs + `qa_log`.
+5. `SUBTASKS` → show only the new rows and new edges → same approve gate as Phase 1 step 4.
+   Approved → Phase 2 rules (ready check, max 3 active leads, rest to `## Queue`). Run paused →
+   all new subtasks go to `## Queue`; they launch on resume.
 
 ## Question relay
 - Per question: `header` = `<Tn> <word>` (≤12 chars); `question` = `[<Tn> · <subtask title>] <one

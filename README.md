@@ -55,6 +55,7 @@ To work on Sonny Boy itself, add your local clone instead (`/plugin marketplace 
 | Command | What |
 |---|---|
 | `/sonny-boy:sonny-boy <requirements>` | new run: decompose, build in worktrees, open PRs |
+| `/sonny-boy:sonny-boy add <requirement>` | add a requirement to the open run while it works; new subtasks join it |
 | `/sonny-boy:sonny-boy status` | status board, restack children whose parent PR merged |
 | `/sonny-boy:sonny-boy pause` / `resume [run]` | pause safely; resume in a fresh session from files |
 | `/sonny-boy:dev-pipeline <requirement>` | the plain single-requirement pipeline in the current checkout |
